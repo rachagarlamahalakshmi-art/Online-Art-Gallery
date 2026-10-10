@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>Login - Online Art Gallery</title>
+<style>
+body{
+margin:0;
+font-family:Arial;
+background-color:beige;
+}
+.header{
+background-color:lightblue;
+text-align:center;
+padding:20px;
+}
+.login{
+width:350px;
+margin:50px auto;
+background-color:white;
+border:1px solid black;
+padding:25px;
+text-align:center;
+}
+.login input[type="text"]{
+width:250px;
+padding:10px;
+margin:10px;
+}
+.login input[type="password"]{
+width:250px;
+padding:10px;
+margin:10px;
+}
+.login input[type="submit"]{
+padding:10px 25px;
+margin:10px;
+}
+.error{
+color:red;
+font-size:14px;
+}
+.login a{
+text-decoration:none;
+color:black;
+}
+.footer{
+background-color:black;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:80px;
+}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>ONLINE ART GALLERY</h1>
+<p>Login to your account</p>
+</div>
+<div class="login">
+<h2>LOGIN</h2>
+<form onsubmit="return loginUser()">
+<input type="text" id="username" placeholder="Enter Username"><br>
+<input type="password" id="password" placeholder="Enter Password"><br>
+<p id="loginError" class="error"></p>
+<input type="submit" value="Login">
+</form>
+<p>New user?</p>
+<a href="register.html">Create an Account</a>
+</div>
+<div class="footer">
+<p>2026 Online Art Gallery</p>
+</div>
+<script>
+function loginUser(){
+var username=document.getElementById("username").value;
+var password=document.getElementById("password").value;
+var error=document.getElementById("loginError");
+if(username=="" || password==""){
+error.innerHTML="Please enter username and password";
+return false;
+}
+window.location.href="artwork.html";
+return false;
+}
+</script>
+</body>
+</html>

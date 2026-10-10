@@ -1,0 +1,243 @@
+artwork purchase(artworks.html):-
+<html>
+<head>
+<title>Artworks - Online Art Gallery</title>
+<style>
+body{
+margin:0;
+font-family:Arial;
+background-color:beige;
+}
+.header{
+background-color:lightblue;
+text-align:center;
+padding:20px;
+}
+.artworks{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+padding:20px;
+}
+.artwork{
+background-color:white;
+border:1px solid black;
+text-align:center;
+padding:15px;
+}
+.artwork img{
+width:200px;
+height:150px;
+}
+.artwork input{
+padding:8px 15px;
+margin:5px;
+}
+.details{
+width:500px;
+margin:30px auto;
+background-color:white;
+border:1px solid black;
+padding:25px;
+text-align:center;
+}
+.details input[type="text"]{
+width:250px;
+padding:10px;
+margin:8px;
+}
+.details input[type="button"]{
+padding:10px 20px;
+margin:8px;
+}
+.error{
+color:red;
+font-size:14px;
+}
+.success{
+color:green;
+font-size:14px;
+}
+.footer{
+background-color:black;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:50px;
+}
+.footer a{
+color:white;
+text-decoration:none;
+margin:5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>ONLINE ART GALLERY</h1>
+<p>Explore Our Artworks</p>
+</div>
+
+<div class="artworks">
+
+<div class="artwork">
+<img src="painting1.jpg">
+<h3>Nature Painting</h3>
+<p>Artist: Ravi</p>
+<p>Price: ₹5000</p>
+<input type="button" value="Purchase" onclick="selectArtwork('Nature Painting','Ravi','5000')">
+</div>
+
+<div class="artwork">
+<img src="painting2.jpg">
+<h3>Modern Art</h3>
+<p>Artist: Priya</p>
+<p>Price: ₹7000</p>
+<input type="button" value="Purchase" onclick="selectArtwork('Modern Art','Priya','7000')">
+</div>
+
+<div class="artwork">
+<img src="painting3.jpg">
+<h3>Portrait</h3>
+<p>Artist: Arun</p>
+<p>Price: ₹6000</p>
+<input type="button" value="Purchase" onclick="selectArtwork('Portrait','Arun','6000')">
+</div>
+
+<div class="artwork">
+<img src="painting4.jpg">
+<h3>Abstract Art</h3>
+<p>Artist: Meena</p>
+<p>Price: ₹8000</p>
+<input type="button" value="Purchase" onclick="selectArtwork('Abstract Art','Meena','8000')">
+</div>
+
+<div class="artwork">
+<img src="painting5.jpg">
+<h3>Landscape Painting</h3>
+<p>Artist: Kiran</p>
+<p>Price: ₹5500</p>
+<input type="button" value="Purchase" onclick="selectArtwork('Landscape Painting','Kiran','5500')">
+</div>
+
+<div class="artwork">
+<img src="painting6.jpg">
+<h3>Traditional Art</h3>
+<p>Artist: Anjali</p>
+<p>Price: ₹6500</p>
+<input type="button" value="Purchase" onclick="selectArtwork('Traditional Art','Anjali','6500')">
+</div>
+
+</div>
+
+<div class="details" id="purchase">
+
+<h2>PURCHASE ARTWORK</h2>
+
+<p id="selectedArtwork">Select an artwork to purchase</p>
+
+<input type="text" id="name" placeholder="Enter Name"><br>
+<input type="text" id="email" placeholder="Enter Email"><br>
+<input type="text" id="phone" placeholder="Enter Phone Number"><br>
+<input type="text" id="address" placeholder="Enter Address"><br>
+
+<p id="error" class="error"></p>
+
+<input type="button" value="Confirm Purchase" onclick="purchaseArtwork()">
+
+<p id="message" class="success"></p>
+
+</div>
+
+<div class="footer">
+<a href="artwork.html">Home</a> |
+<a href="artists.html">Artists</a> |
+<a href="artwork.html#auction">Auction</a> |
+<a href="artworks.html">Artworks</a>
+<p>2026 Online Art Gallery. All rights reserved.</p>
+</div>
+
+<script>
+var selectedName="";
+var selectedArtist="";
+var selectedPrice="";
+
+function selectArtwork(name,artist,price){
+selectedName=name;
+selectedArtist=artist;
+selectedPrice=price;
+
+document.getElementById("selectedArtwork").innerHTML="Artwork: "+name+" | Artist: "+artist+" | Price: ₹"+price;
+
+document.getElementById("purchase").scrollIntoView();
+}
+
+
+function purchaseArtwork(){
+var name=document.getElementById("name").value;
+var email=document.getElementById("email").value;
+var phone=document.getElementById("phone").value;
+var address=document.getElementById("address").value;
+var error=document.getElementById("error");
+var message=document.getElementById("message");
+
+error.innerHTML="";
+message.innerHTML="";
+
+if(selectedName==""){
+error.innerHTML="Please select an artwork";
+return;
+}
+
+if(name==""){
+error.innerHTML="Enter name";
+return;
+}
+
+if(email==""){
+error.innerHTML="Enter email";
+return;
+}
+
+if(!email.includes("@")){
+error.innerHTML="Enter valid email";
+return;
+}
+
+if(phone==""){
+error.innerHTML="Enter phone number";
+return;
+}
+
+if(address==""){
+error.innerHTML="Enter address";
+return;
+}
+
+var orders=JSON.parse(localStorage.getItem("orders")) || [];
+
+var order={
+artwork:selectedName,
+artist:selectedArtist,
+price:selectedPrice,
+customerName:name,
+email:email,
+phone:phone,
+address:address,
+status:"Pending"
+};
+
+orders.push(order);
+
+localStorage.setItem("orders",JSON.stringify(orders));
+
+message.innerHTML="Order placed successfully";
+}
+
+
+</script>
+
+</body>
+</html>

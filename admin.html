@@ -1,0 +1,146 @@
+admin page(admin.html):-
+<html>
+<head>
+<title>Admin - Online Art Gallery</title>
+<style>
+body{
+margin:0;
+font-family:Arial;
+background-color:beige;
+}
+.header{
+background-color:lightblue;
+text-align:center;
+padding:20px;
+}
+.admin{
+width:700px;
+margin:40px auto;
+}
+.order{
+background-color:white;
+border:1px solid black;
+padding:20px;
+margin-bottom:20px;
+}
+.order input{
+padding:10px 20px;
+margin:5px;
+}
+.approve{
+color:green;
+font-size:16px;
+}
+.reject{
+color:red;
+font-size:16px;
+}
+.pending{
+color:orange;
+font-size:16px;
+}
+.message{
+font-size:16px;
+}
+.footer{
+background-color:black;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:50px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>ONLINE ART GALLERY</h1>
+<p>ADMIN PAGE</p>
+</div>
+
+<div class="admin">
+
+<h2>ORDER VALIDATION</h2>
+
+<div id="orders"></div>
+
+</div>
+
+<div class="footer">
+<p>Admin - Online Art Gallery</p>
+</div>
+
+<script>
+
+var orders=JSON.parse(localStorage.getItem("orders")) || [];
+
+var orderDiv=document.getElementById("orders");
+
+if(orders.length==0){
+orderDiv.innerHTML="<p>No orders available</p>";
+}
+else{
+
+for(var i=0;i<orders.length;i++){
+
+var order=orders[i];
+
+var div=document.createElement("div");
+
+div.className="order";
+
+div.innerHTML=
+"<h3>Order "+(i+1)+"</h3>"+
+"<p>Artwork: "+order.artwork+"</p>"+
+"<p>Artist: "+order.artist+"</p>"+
+"<p>Price: ₹"+order.price+"</p>"+
+"<h3>Customer Details</h3>"+
+"<p>Name: "+order.customerName+"</p>"+
+"<p>Email: "+order.email+"</p>"+
+"<p>Phone: "+order.phone+"</p>"+
+"<p>Address: "+order.address+"</p>"+
+"<p>Status: <span id='status"+i+"'>"+order.status+"</span></p>"+
+"<input type='button' value='Approve Order' onclick='approveOrder("+i+")'>"+
+"<input type='button' value='Reject Order' onclick='rejectOrder("+i+")'>"+
+"<p id='message"+i+"' class='message'></p>";
+
+orderDiv.appendChild(div);
+}
+
+}
+
+function approveOrder(index){
+
+orders[index].status="Approved";
+
+localStorage.setItem("orders",JSON.stringify(orders));
+
+document.getElementById("status"+index).innerHTML="Approved";
+
+document.getElementById("status"+index).className="approve";
+
+document.getElementById("message"+index).innerHTML="Order approved successfully";
+
+document.getElementById("message"+index).className="approve";
+}
+
+function rejectOrder(index){
+
+orders[index].status="Rejected";
+
+localStorage.setItem("orders",JSON.stringify(orders));
+
+document.getElementById("status"+index).innerHTML="Rejected";
+
+document.getElementById("status"+index).className="reject";
+
+document.getElementById("message"+index).innerHTML="Order rejected";
+
+document.getElementById("message"+index).className="reject";
+}
+
+</script>
+
+</body>
+</html>

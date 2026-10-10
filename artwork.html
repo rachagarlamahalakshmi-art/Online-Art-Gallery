@@ -1,0 +1,272 @@
+<html>
+<head>
+<title>Online Art Gallery</title>
+<style>
+body{
+margin:0;
+font-family:Arial;
+}
+.header{
+background-color:lightblue;
+display:flex;
+padding:15px;
+align-items:center;
+}
+.logo{
+width:25%;
+text-align:center;
+}
+.search{
+width:40%;
+text-align:center;
+}
+.search input[type="text"]{
+padding:8px;
+width:200px;
+}
+.search input[type="button"]{
+padding:8px;
+}
+.links{
+width:35%;
+text-align:center;
+}
+.links a{
+text-decoration:none;
+margin:5px;
+color:black;
+}
+.menu{
+background-color:lightgray;
+display:flex;
+justify-content:space-around;
+padding:12px;
+}
+.menu a{
+text-decoration:none;
+color:black;
+font-weight:bold;
+}
+.home{
+background-color:beige;
+text-align:center;
+padding:30px;
+}
+.gallery-title{
+background-color:lightpink;
+text-align:center;
+padding:15px;
+}
+.gallery{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+padding:20px;
+}
+.artwork{
+border:1px solid black;
+text-align:center;
+padding:15px;
+}
+.artwork img{
+width:200px;
+height:150px;
+}
+.artwork input[type="button"]{
+padding:8px 15px;
+}
+.artist-title{
+background-color:lightgreen;
+text-align:center;
+padding:15px;
+}
+.artists{
+display:flex;
+justify-content:space-around;
+padding:20px;
+}
+.artist{
+border:1px solid black;
+width:25%;
+text-align:center;
+padding:15px;
+}
+.exhibition{
+background-color:lightyellow;
+text-align:center;
+padding:20px;
+}
+.auction{
+background-color:lightblue;
+text-align:center;
+padding:20px;
+}
+.auction input[type="text"]{
+padding:10px;
+width:180px;
+}
+.auction input[type="button"]{
+padding:10px 15px;
+}
+.reviews{
+background-color:lightpink;
+text-align:center;
+padding:20px;
+}
+#bidMessage{
+font-size:15px;
+}
+.footer{
+background-color:black;
+color:white;
+text-align:center;
+padding:20px;
+}
+.footer a{
+color:white;
+text-decoration:none;
+margin:5px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+<div class="logo">
+<h2>ART GALLERY</h2>
+</div>
+<div class="search">
+<input type="text" placeholder="Search artwork">
+<input type="button" value="Search">
+</div>
+<div class="links">
+<a href="login1.html">Login</a> |
+<a href="register.html">Register</a>
+</div>
+</div>
+
+<div class="menu">
+<a href="artwork.html">Home</a>
+<a href="#gallery">Gallery</a>
+<a href="#artists">Artists</a>
+<a href="#exhibitions">Exhibitions</a>
+<a href="#auction">Auction</a>
+<a href="#reviews">Reviews</a>
+</div>
+
+<div class="home">
+<h1>Welcome to Online Art Gallery</h1>
+<p>Explore artworks from different artists.</p>
+<p>Browse, purchase and participate in auctions.</p>
+</div>
+
+<div class="gallery-title" id="gallery">
+<h2>ARTWORK GALLERY</h2>
+</div>
+
+<div class="gallery">
+
+<div class="artwork">
+<img src="painting1.jpg">
+<h3>Nature Painting</h3>
+<p>Artist: Ravi</p>
+<p>Price: ₹5000</p>
+<a href="artwork.html"><input type="button" value="View Details"></a>
+</div>
+
+<div class="artwork">
+<img src="painting2.jpg">
+<h3>Modern Art</h3>
+<p>Artist: Priya</p>
+<p>Price: ₹7000</p>
+<a href="artwork.html"><input type="button" value="View Details"></a>
+</div>
+
+<div class="artwork">
+<img src="painting3.jpg">
+<h3>Portrait</h3>
+<p>Artist: Arun</p>
+<p>Price: ₹6000</p>
+<a href="artwork.html"><input type="button" value="View Details"></a>
+</div>
+
+</div>
+
+<div class="artist-title" id="artists">
+<h2>OUR ARTISTS</h2>
+</div>
+
+<div class="artists">
+
+<div class="artist">
+<h3>Ravi</h3>
+<p>Painter</p>
+</div>
+
+<div class="artist">
+<h3>Priya</h3>
+<p>Modern Artist</p>
+</div>
+
+<div class="artist">
+<h3>Arun</h3>
+<p>Portrait Artist</p>
+</div>
+
+</div>
+
+<div class="exhibition" id="exhibitions">
+<h2>EXHIBITIONS</h2>
+<p>Modern Art Exhibition</p>
+<p>Coming Soon</p>
+</div>
+
+<div class="auction" id="auction">
+<h2>AUCTION</h2>
+<h3>Nature Painting</h3>
+<p>Artist: Ravi</p>
+<p>Current Bid: ₹<span id="currentBid">5000</span></p>
+<input type="text" id="bidAmount" placeholder="Enter your bid">
+<input type="button" value="Place Bid" onclick="placeBid()">
+<p id="bidMessage"></p>
+</div>
+
+<div class="reviews" id="reviews">
+<h2>REVIEWS</h2>
+<p>"Beautiful artwork collection."</p>
+<p>- User Review</p>
+</div>
+
+<div class="footer">
+<a href="artwork.html">Home</a> |
+<a href="login1.html">Login</a> |
+<a href="register.html">Register</a>
+<p>2026 Online Art Gallery. All rights reserved.</p>
+</div>
+
+<script>
+function placeBid(){
+var bid=document.getElementById("bidAmount").value;
+var current=document.getElementById("currentBid").innerHTML;
+var message=document.getElementById("bidMessage");
+
+if(bid==""){
+message.innerHTML="Please enter your bid";
+message.style.color="red";
+return;
+}
+
+if(Number(bid)<=Number(current)){
+message.innerHTML="Bid must be higher than current bid";
+message.style.color="red";
+return;
+}
+
+document.getElementById("currentBid").innerHTML=bid;
+message.innerHTML="Bid placed successfully";
+message.style.color="green";
+}
+</script>
+
+</body>
+</html>                                                          it is atwork html                                                                                   

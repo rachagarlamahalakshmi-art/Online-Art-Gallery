@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>Register - Online Art Gallery</title>
+<style>
+body{
+margin:0;
+font-family:Arial;
+background-color:beige;
+}
+.header{
+background-color:lightblue;
+text-align:center;
+padding:20px;
+}
+.register{
+width:350px;
+margin:50px auto;
+background-color:white;
+border:1px solid black;
+padding:25px;
+text-align:center;
+}
+.register input[type="text"]{
+width:250px;
+padding:10px;
+margin:10px;
+}
+.register input[type="password"]{
+width:250px;
+padding:10px;
+margin:10px;
+}
+.register input[type="submit"]{
+padding:10px 25px;
+margin:10px;
+}
+.error{
+color:red;
+font-size:14px;
+}
+.register a{
+text-decoration:none;
+color:black;
+}
+.footer{
+background-color:black;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:80px;
+}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>ONLINE ART GALLERY</h1>
+<p>Create your account</p>
+</div>
+<div class="register">
+<h2>REGISTER</h2>
+<form onsubmit="return registerUser()">
+<input type="text" id="name" placeholder="Enter Name"><br>
+<input type="text" id="email" placeholder="Enter Email"><br>
+<p id="emailError" class="error"></p>
+<input type="password" id="password" placeholder="Enter Password"><br>
+<input type="submit" value="Register">
+</form>
+<p>Already have an account?</p>
+<a href="login1.html">Login</a>
+<br><br>
+<a href="artwork.html">Back to Home</a>
+</div>
+<div class="footer">
+<p>2026 Online Art Gallery</p>
+</div>
+<script>
+function registerUser(){
+var name=document.getElementById("name").value;
+var email=document.getElementById("email").value;
+var password=document.getElementById("password").value;
+var error=document.getElementById("emailError");
+if(name=="" || email=="" || password==""){
+error.innerHTML="Please fill all the details";
+return false;
+}
+if(!email.includes("@")){
+error.innerHTML="Please enter a valid email address";
+return false;
+}
+window.location.href="artwork.html";
+return false;
+}
+</script>
+</body>
+</html>
